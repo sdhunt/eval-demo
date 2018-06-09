@@ -15,16 +15,16 @@
   <script>
     $(document).ready(function() {
       sdhEvalLib.prepare('Example 3', [
-        `({b.substring(2)}{'nana'} + ' ').repeat(4) + b.substring(0,2) + 'tm' + b.substring(1,3)`,
-        `{('nana' + ' ')}{'nana '}.repeat(4) + b.substring(0,2) + 'tm' + b.substring(1,3)`,
-        `{'nana '.repeat(4)}{'nana nana nana nana '} + b.substring(0,2) + 'tm' + b.substring(1,3)`,
-        `'nana nana nana nana ' + {b.substring(0,2)}{'Ba'} + 'tm' + b.substring(1,3)`,
-        `{'nana nana nana nana ' + 'Ba'}{'nana nana nana nana Ba'} + 'tm' + b.substring(1,3)`,
-        `{'nana nana nana nana Ba' + 'tm'}{'nana nana nana nana Batm'} + b.substring(1,3)`,
-        `'nana nana nana nana Batm' + {b.substring(1,3)}{'an'}`,
+        `({b[2:]}{'nana'} + ' ') * 4 + b[:2] + 'tm' + b[1:3]`,
+        `{('nana' + ' ')}{'nana '} * 4 + b[:2] + 'tm' + b[1:3]`,
+        `{'nana ' * 4}{'nana nana nana nana '} + b[:2] + 'tm' + b[1:3]`,
+        `'nana nana nana nana ' + {b[:2]}{'Ba'} + 'tm' + b[1:3]`,
+        `{'nana nana nana nana ' + 'Ba'}{'nana nana nana nana Ba'} + 'tm' + b[1:3]`,
+        `{'nana nana nana nana Ba' + 'tm'}{'nana nana nana nana Batm'} + b[1:3]`,
+        `'nana nana nana nana Batm' + {b[1:3]}{'an'}`,
         `{'nana nana nana nana Batm' + 'an'}{'nana nana nana nana Batman'}`,
       ], [
-        `let b = 'Banana';`,
+        `b = 'Banana';`,
       ]);
     });
   </script>
