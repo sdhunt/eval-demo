@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>sdhEvalLib 1.0 API</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <span class="label">sdhEvalLib 1.0 API</span>
+    </header>
+    <main>
+      <h1> Page Skeleton </h1>
+
+      <p>
+        An expression evaluation page should have
+        the following structure:
+      </p>
+      <pre>
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;meta charset="utf-8"&gt;
+      &lt;title&gt; ... &lt;/title&gt;
+      &lt;link href="css/style.css" type="text/css" rel="stylesheet"&gt;
+      &lt;script src="js/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+      &lt;script src="js/sdhEvalLib-1.0.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+      &lt;header&gt;&lt;/header&gt;
+      &lt;main&gt;&lt;/main&gt;
+    &lt;body&gt;
+
+    &lt;script&gt;
+      $(document).ready(function() {
+        sdhEvalLib.prepare(
+          ...
+        );
+      });
+    &lt;/script&gt;
+  &lt;/html&gt;
+      </pre>
+
+      <h1> Arguments to prepare() </h1>
+
+      <p>
+        The arguments to <code>sdhEvalLib.prepare( ... )</code> are:
+      </p>
+      <ol>
+        <li> <code> title </code> - string, displayed in the page header </li>
+        <li> <code> data </code> - array of evaluation steps </li>
+        <li> <code> prolog </code> - <i>(optional)</i> array of prolog lines </li>
+      </ol>
+
+      <h2> data array </h2>
+
+      <p>
+        Each string in the data array should be a step in the expression
+        evaluation, which takes the form:
+      </p>
+      <pre>
+        `...pre...{before}{after}...post...`
+      </pre>
+
+      <p> For example:</p>
+      <pre>
+        [
+          `5 + {3 * 3}{9}`,
+          `{5 + 9}{14}`,
+        ]
+      </pre>
+
+      <p> In each case, the text in the first set of braces <code>{ }</code>
+        is the term about to be evaluated, and the text in the second set
+        of braces is the result of the evaluation.
+
+      <p> The initial string is composed as: </p>
+      <pre>
+        `...pre...before...post...`
+      </pre>
+
+      <p> ...and will transform to: </p>
+      <pre>
+        `...pre...after...post...`
+      </pre>
+
+
+
+      <h2> prolog array </h2>
+
+      <p> If supplied, the lines in the prolog array are displayed
+        verbatim, before the main example. </p>
+
+      <p> For example: </p>
+      <pre>
+        [
+          `# We start with a list`,
+          `let pets = ['dog', 'cat', 'rat'];`,
+        ]
+      </pre>
+
+    </main>
+  </body>
+</html>

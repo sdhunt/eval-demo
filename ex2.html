@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ex.2</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/sdhEvalLib-1.0.js"></script>
+  </head>
+  <body>
+    <header></header>
+    <section></section>
+    <main></main>
+  </body>
+  <script>
+    $(document).ready(function() {
+      sdhEvalLib.prepare('Example 2', [
+        `''.join({pets}{['dog', 'cat', 'rat']}).upper().join(pets)`,
+        `{''.join(['dog', 'cat', 'rat'])}{'dogcatrat'}.upper().join(pets)`,
+        `{'dogcatrat'.upper()}{'DOGCATRAT'}.join(pets)`,
+        `'DOGCATRAT'.join({pets}{['dog', 'cat', 'rat']})`,
+        `{'DOGCATRAT'.join(['dog', 'cat', 'rat'])}{'dogDOGCATRATcatDOGCATRATrat'}`,
+      ], [
+        `let pets = ['dog', 'cat', 'rat'];`,
+      ]);
+    });
+  </script>
+</html>

@@ -1,0 +1,90 @@
+/* stylesheet for expression evaluation examples */
+html {
+  font-family: Helvetica, sans-serif;
+  background-color: #eef;
+  color: black;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 20px;
+  background-color: #dde;
+}
+
+h1,
+h2 {
+  margin-top: 40px;
+  color: #789;
+}
+
+.api {
+    font-size: 1.8em;
+    margin: 6px;
+    padding: 2px;
+}
+
+code {
+   font-size: 120%;
+   padding: 4px;
+   color: green;
+}
+
+ul li {
+  font-family: monospace;
+  font-size: 1.4em;
+  padding: 8px;
+}
+
+a {
+    color: #66f;
+    text-decoration: none;
+}
+a:visited {
+  color: #449;
+}
+a:hover {
+  color: white;
+  background-color: #449;
+}
+
+.label {
+  font-style: italic;
+  font-size: 30px;
+  padding: 8px;
+  color: #88c;
+}
+
+.buttons {
+  display: flex;
+}
+
+button {
+  font-size: 1em;
+  margin: 8px;
+  cursor: pointer;
+}
+
+section {
+  margin: 30px 20px;
+  color: #88a;
+}
+
+main {
+    margin-left: 20px;
+}
+
+.show-eval {
+  font-family: monospace;
+  font-size: 1.8em;
+  padding: 8px;
+}
+
+.show-eval span {
+  vertical-align: text-top;
+}
+
+.red {
+  color: red;
+}
