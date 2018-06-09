@@ -1,4 +1,5 @@
 // Simon Hunt's Expression Evaluation Demonstrator.
+// Version 1.0 -- June 9th, 2018
 //
 // Inspired by
 // Al Sweigart's ShowEval at https://github.com/asweigart/showeval
@@ -14,16 +15,17 @@ const ANIM_STEP = 350;
 const cooked = [];
 let step = 0;
 
-const addControls = title => {
+const addHeader = (title, noSteps) => {
   const label = $('<span>').addClass('label').text(title);
   const buttons = $('<span>').addClass('buttons');
 
-  buttons
-    .append(button('Next Step', nextStep))
-    .append(button('Reset', reset));
+  if (!noSteps) {
+    buttons.append(button('Next Step', nextStep))
+           .append(button('Reset', reset));
+  }
+  buttons.append(button('Index', index));
 
   $('header').append(label).append(buttons);
-
 };
 
 const button = (text, action) => {
@@ -32,23 +34,14 @@ const button = (text, action) => {
   return btn;
 };
 
-const addProlog = lines => {
-  if ($.isArray(lines)) {
-      lines.forEach(line => addLine(line, 'prolog'));
-  }
-};
 
-const addLine = (text, cls) => {
-  const div = $('<div>').addClass('show-eval').addClass(cls);
-  div.append(span(text));
-  $('section').append(div);
-};
+const index = () => document.location = 'index.html';
 
 const reset = () => {
   $('main').empty();
   showStep(0);
   step = 0;
-}
+};
 
 const nextStep = () => {
   if (step < cooked.length) {
@@ -56,7 +49,7 @@ const nextStep = () => {
     animateEval(div, step);
     step += 1;
   }
-}
+};
 
 const showStep = (num, inRed) => {
   const div = $('<div>').addClass('show-eval');
@@ -70,24 +63,19 @@ const showStep = (num, inRed) => {
   return div;
 };
 
-
 const animateEval = (div, step) => {
   const after = cooked[step][AFTER];
   const evalSpan = div.children('.eval')
   animSequence(ANIM_STEP,
-    beat,
-    beat,
+    () => null,
+    () => null,
     () => fadeOut(evalSpan),
     () => replaceText(evalSpan, after),
     () => fadeIn(evalSpan),
-    beat,
+    () => null,
     () => blacken(evalSpan),
   );
 };
-
-// ======
-
-const beat = () => undefined;
 
 const fadeIn = elem => {
   elem.fadeTo(FADE_TIME, 1);
@@ -112,7 +100,7 @@ const animSequence = (pauseMs, ...fns) => {
     fn();
     window.setTimeout(() => animSequence(pauseMs, ...fns), pauseMs);
   }
-}
+};
 
 const span = (t, cls) => {
   const s = $('<span>').text(t);
@@ -130,6 +118,18 @@ const getWidth = text => {
   return width + 1; // fudge
 };
 
+const addProlog = lines => {
+  if ($.isArray(lines)) {
+      lines.forEach(line => addLine(line, 'prolog'));
+  }
+};
+
+const addLine = (text, cls) => {
+  const div = $('<div>').addClass('show-eval').addClass(cls);
+  div.append(span(text));
+  $('section').append(div);
+};
+
 const prepareData = data => {
   const regex = /(.*){(.*)}{(.*)}(.*)/;
   data.forEach(d => {
@@ -139,12 +139,16 @@ const prepareData = data => {
 };
 
 
-// Export prepare() method to global hook
+// Export API to global namespace:
 sdhEvalLib = {
   prepare: (title, data, prolog) => {
-    addControls(title);
+    addHeader(title);
     addProlog(prolog);
     prepareData(data);
     reset();
-  }
+  },
+
+  info: title => {
+    addHeader(title, true);
+  },
 };
